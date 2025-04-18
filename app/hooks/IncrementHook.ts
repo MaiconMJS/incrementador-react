@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from "react";
+import ButtonType from "@/app/enum/ButtonType";
 
 const IncrementHook = () => {
-  const [n1, setN1] = useState(0);
-  const [n2, setN2] = useState(0);
+  const [number, setNumber] = useState({ n1: 0, n2: 0 });
 
   const [pressed, setPressed] = useState({
-    manual: false,
-    auto: false,
-    zero: false,
-    stop: false,
+    [ButtonType.MANUAL]: false,
+    [ButtonType.AUTO]: false,
+    [ButtonType.ZERO]: false,
+    [ButtonType.STOP]: false,
   });
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  function animateButton(name: keyof typeof pressed) {
+  function animateButton(name: ButtonType) {
     setPressed((prev) => ({ ...prev, [name]: true }));
     setTimeout(() => {
       setPressed((prev) => ({ ...prev, [name]: false }));
@@ -23,9 +23,9 @@ const IncrementHook = () => {
 
   function manualIncrement() {
     if (!intervalRef.current) {
-      animateButton("manual");
+      animateButton(ButtonType.MANUAL);
       const job = setTimeout(() => {
-        setN1((prev) => prev + 1);
+        setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
         intervalRef.current = null;
       }, 1000);
       intervalRef.current = job;
@@ -34,22 +34,21 @@ const IncrementHook = () => {
 
   function autoIncrement() {
     if (!intervalRef.current) {
-      animateButton("auto");
+      animateButton(ButtonType.AUTO);
       const job = setInterval(() => {
-        setN1((prev) => prev + 1);
+        setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
       }, 1000);
       intervalRef.current = job;
     }
   }
 
   function zeroIncrement() {
-    if (n1 > 0 || n2 > 0) {
-      animateButton("zero");
-      setN1(0);
-      setN2(0);
+    if (number.n1 > 0 || number.n2 > 0) {
+      animateButton(ButtonType.ZERO);
+      setNumber((prev) => ({ n1: (prev.n1 = 0), n2: (prev.n2 = 0) }));
     }
     if (intervalRef.current) {
-      animateButton("zero");
+      animateButton(ButtonType.ZERO);
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
@@ -57,7 +56,7 @@ const IncrementHook = () => {
 
   function stopIncrement() {
     if (intervalRef.current) {
-      animateButton("stop");
+      animateButton(ButtonType.STOP);
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
@@ -65,11 +64,11 @@ const IncrementHook = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (n2 > 0) setN2((prev) => prev - 1);
-      setN2((prev) => prev + n1);
+      if (number.n2 > 0) setNumber((prev) => ({ ...prev, n2: prev.n2 - 1 }));
+      setNumber((prev) => ({ ...prev, n2: prev.n2 + number.n1 }));
     }, 500);
     return () => clearTimeout(timeout);
-  }, [n1]);
+  }, [number.n1]);
 
   return {
     pressed,
@@ -77,8 +76,7 @@ const IncrementHook = () => {
     autoIncrement,
     zeroIncrement,
     stopIncrement,
-    n1,
-    n2,
+    number,
   };
 };
 

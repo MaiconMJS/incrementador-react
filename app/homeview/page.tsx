@@ -13,13 +13,12 @@ const HomeView = () => {
     autoIncrement,
     zeroIncrement,
     stopIncrement,
-    n1,
-    n2,
+    number,
   } = IncrementHook();
 
   return (
     <main className="flex flex-col h-screen justify-center items-center bg-black">
-      <Display n1={n1} n2={n2} />
+      <Display n1={number.n1} n2={number.n2} />
       <section className="flex flex-row justify-evenly w-3/4 px-7">
         <ButtonStyle
           nome={Names.nameButton.manual}
