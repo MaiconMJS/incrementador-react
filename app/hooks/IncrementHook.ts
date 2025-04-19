@@ -22,44 +22,53 @@ const IncrementHook = () => {
   }
 
   function manualIncrement() {
+    manualIncrementORAutoIncrement(ButtonType.MANUAL, false);
+  }
+
+  function manualIncrementORAutoIncrement(
+    buttonType: ButtonType,
+    temporizador: boolean
+  ) {
     if (!intervalRef.current) {
-      animateButton(ButtonType.MANUAL);
-      const job = setTimeout(() => {
-        setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
-        intervalRef.current = null;
-      }, 1000);
-      intervalRef.current = job;
+      if (temporizador) {
+        animateButton(buttonType);
+        const job = setInterval(() => {
+          setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
+        }, 1000);
+        intervalRef.current = job;
+      } else {
+        animateButton(buttonType);
+        const job = setTimeout(() => {
+          setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
+          intervalRef.current = null;
+        }, 1000);
+        intervalRef.current = job;
+      }
     }
   }
 
   function autoIncrement() {
-    if (!intervalRef.current) {
-      animateButton(ButtonType.AUTO);
-      const job = setInterval(() => {
-        setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
-      }, 1000);
-      intervalRef.current = job;
-    }
+    manualIncrementORAutoIncrement(ButtonType.AUTO, true);
   }
 
   function zeroIncrement() {
     if (number.n1 > 0 || number.n2 > 0) {
       animateButton(ButtonType.ZERO);
-      setNumber((prev) => ({ n1: (prev.n1 = 0), n2: (prev.n2 = 0) }));
+      setNumber({ n1: 0, n2: 0 });
     }
+    clearIntervalCaseStopOrZero(ButtonType.ZERO);
+  }
+
+  function clearIntervalCaseStopOrZero(buttonType: ButtonType) {
     if (intervalRef.current) {
-      animateButton(ButtonType.ZERO);
+      animateButton(buttonType);
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
   }
 
   function stopIncrement() {
-    if (intervalRef.current) {
-      animateButton(ButtonType.STOP);
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
+    clearIntervalCaseStopOrZero(ButtonType.STOP);
   }
 
   useEffect(() => {
