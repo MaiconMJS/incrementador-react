@@ -1,5 +1,5 @@
 import ButtonProps from "@/app/props/ButtonProps";
-import Dimens from "@/app/Dimens";
+import Dimens from "@/app/utils/Dimens";
 
 const ButtonStyle = ({ nome, style, isPressed, onClick }: ButtonProps) => {
   return (

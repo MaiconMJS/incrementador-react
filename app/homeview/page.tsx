@@ -2,9 +2,11 @@
 
 import Display from "@/app/components/Display";
 import ButtonStyle from "@/app/components/ButtonStyle";
-import Names from "@/app/Names";
-import Dimens from "@/app/Dimens";
+import Names from "@/app/utils/Names";
+import Dimens from "@/app/utils/Dimens";
 import IncrementHook from "@/app/hooks/IncrementHook";
+import Colors from "@/app/utils/Colors";
+import useSystemTheme from "@/app/services/systemTheme";
 
 const HomeView = () => {
   const {
@@ -16,8 +18,14 @@ const HomeView = () => {
     number,
   } = IncrementHook();
 
+  const { isDarkMode } = useSystemTheme();
+
   return (
-    <main className="flex flex-col h-screen justify-center items-center bg-black">
+    <main
+      className={`flex flex-col h-screen justify-center items-center ${
+        isDarkMode ? Colors.systemTheme.dark : Colors.systemTheme.light
+      }`}
+    >
       <Display n1={number.n1} n2={number.n2} />
       <section className="flex flex-row justify-evenly w-3/4 px-7">
         <ButtonStyle
