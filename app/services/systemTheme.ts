@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Theme from "@/app/resources/Theme";
+import Colors from "@/app/resources/Colors";
 
 function useSystemTheme() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -7,10 +9,17 @@ function useSystemTheme() {
     if (typeof window === "undefined") return;
     const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
 
-    setIsDarkMode(matchMedia.matches);
+    const setTheme = (isDark: boolean) => {
+      setIsDarkMode(isDark);
+      Theme.setTheme(
+        isDark ? Colors.systemTheme.dark : Colors.systemTheme.light
+      );
+    };
+
+    setTheme(matchMedia.matches);
 
     const handler = (event: MediaQueryListEvent) => {
-      setIsDarkMode(event.matches);
+      setTheme(event.matches);
     };
 
     matchMedia.addEventListener("change", handler);

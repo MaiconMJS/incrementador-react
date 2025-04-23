@@ -1,7 +1,7 @@
 const Colors = {
   systemTheme: {
-    light: "bg-light",
     dark: "bg-black",
+    light: "bg-light",
   },
 };
 

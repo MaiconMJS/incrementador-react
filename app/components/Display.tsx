@@ -1,5 +1,5 @@
 import DisplayProps from "@/app/props/DisplayProps";
-import Dimens from "@/app/utils/Dimens";
+import Dimens from "@/app/resources/Dimens";
 
 const Display = ({ n1, n2 }: DisplayProps) => {
   return (
