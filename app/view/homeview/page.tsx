@@ -7,9 +7,9 @@ import { Dimens } from "@/app/resources/Dimens";
 import { IncrementHook } from "@/app/hooks/IncrementHook";
 import { useSystemTheme } from "@/app/services/systemTheme";
 import { Theme } from "@/app/resources/Theme";
-import { Styles } from "../resources/Styles";
+import { Styles } from "@/app/resources/Styles";
 
-export const HomeView = () => {
+const HomeView = () => {
   const {
     pressed,
     manualIncrement,
@@ -59,3 +59,4 @@ export const HomeView = () => {
     </main>
   );
 };
+export default HomeView;

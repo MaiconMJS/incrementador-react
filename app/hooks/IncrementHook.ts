@@ -1,9 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from "react";
 import { ButtonType } from "@/app/enum/ButtonType";
+import { NumberType } from "@/app/enum/NumberType";
 
 export const IncrementHook = () => {
-  const [number, setNumber] = useState({ n1: 0, n2: 0 });
+  const [number, setNumber] = useState({
+    [NumberType.N1]: 0,
+    [NumberType.N2]: 0,
+  });
 
   const [pressed, setPressed] = useState({
     [ButtonType.MANUAL]: false,
@@ -33,13 +37,19 @@ export const IncrementHook = () => {
       if (temporizador) {
         animateButton(buttonType);
         const job = setInterval(() => {
-          setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
+          setNumber((prev) => ({
+            ...prev,
+            [NumberType.N1]: prev[NumberType.N1] + 1,
+          }));
         }, 1000);
         intervalRef.current = job;
       } else {
         animateButton(buttonType);
         const job = setTimeout(() => {
-          setNumber((prev) => ({ ...prev, n1: prev.n1 + 1 }));
+          setNumber((prev) => ({
+            ...prev,
+            [NumberType.N1]: prev[NumberType.N1] + 1,
+          }));
           intervalRef.current = null;
         }, 1000);
         intervalRef.current = job;
@@ -52,9 +62,9 @@ export const IncrementHook = () => {
   }
 
   function zeroIncrement() {
-    if (number.n1 > 0 || number.n2 > 0) {
+    if (number[NumberType.N1] > 0 || number[NumberType.N2] > 0) {
       animateButton(ButtonType.ZERO);
-      setNumber({ n1: 0, n2: 0 });
+      setNumber({ [NumberType.N1]: 0, [NumberType.N2]: 0 });
     }
     clearIntervalCaseStopOrZero(ButtonType.ZERO);
   }
@@ -73,11 +83,18 @@ export const IncrementHook = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (number.n2 > 0) setNumber((prev) => ({ ...prev, n2: prev.n2 - 1 }));
-      setNumber((prev) => ({ ...prev, n2: prev.n2 + number.n1 }));
+      if (number[NumberType.N2] > 0)
+        setNumber((prev) => ({
+          ...prev,
+          [NumberType.N2]: prev[NumberType.N2] - 1,
+        }));
+      setNumber((prev) => ({
+        ...prev,
+        [NumberType.N2]: prev[NumberType.N2] + number[NumberType.N1],
+      }));
     }, 500);
     return () => clearTimeout(timeout);
-  }, [number.n1]);
+  }, [number[NumberType.N1]]);
 
   return {
     pressed,

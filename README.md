@@ -19,7 +19,7 @@ Este projeto é uma aplicação de contador com incremento manual e automático,
 
 ## 🖼️ Preview da Interface
 
-<img src="./tela.png" alt="Screenshot do aplicativo" width="600"/>
+<img src="./images/tela.png" alt="Screenshot do aplicativo" width="600"/>
 
 ---
 
