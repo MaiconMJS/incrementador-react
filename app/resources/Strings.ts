@@ -1,4 +1,4 @@
-const Strings = {
+export const Strings = {
   nameButton: {
     manual: "Manual Increment",
     auto: "Auto Increment",
@@ -6,5 +6,3 @@ const Strings = {
     zero: "Zero Increment",
   },
 };
-
-export default Strings;

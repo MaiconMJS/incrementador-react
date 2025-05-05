@@ -1,7 +1,7 @@
-import DisplayProps from "@/app/props/DisplayProps";
-import Dimens from "@/app/resources/Dimens";
+import { DisplayProps } from "@/app/props/DisplayProps";
+import { Dimens } from "@/app/resources/Dimens";
 
-const Display = ({ n1, n2 }: DisplayProps) => {
+export const Display = ({ n1, n2 }: DisplayProps) => {
   return (
     <section
       className={`flex flex-row justify-evenly w-3/4 ${Dimens.displayPadding}`}
@@ -19,4 +19,3 @@ const Display = ({ n1, n2 }: DisplayProps) => {
     </section>
   );
 };
-export default Display;

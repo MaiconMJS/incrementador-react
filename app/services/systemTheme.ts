@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Theme from "@/app/resources/Theme";
-import Colors from "@/app/resources/Colors";
+import { Theme } from "@/app/resources/Theme";
+import { Colors } from "@/app/resources/Colors";
 
-function useSystemTheme() {
+export function useSystemTheme() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -31,5 +31,3 @@ function useSystemTheme() {
 
   return { isDarkMode };
 }
-
-export default useSystemTheme;

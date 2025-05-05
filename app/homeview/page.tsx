@@ -1,14 +1,15 @@
 "use client";
 
-import Display from "@/app/components/Display";
-import ButtonStyle from "@/app/components/ButtonStyle";
-import Strings from "@/app/resources/Strings";
-import Dimens from "@/app/resources/Dimens";
-import IncrementHook from "@/app/hooks/IncrementHook";
-import useSystemTheme from "@/app/services/systemTheme";
-import Theme from "@/app/resources/Theme";
+import { Display } from "@/app/components/Display";
+import { ButtonStyle } from "@/app/components/ButtonStyle";
+import { Strings } from "@/app/resources/Strings";
+import { Dimens } from "@/app/resources/Dimens";
+import { IncrementHook } from "@/app/hooks/IncrementHook";
+import { useSystemTheme } from "@/app/services/systemTheme";
+import { Theme } from "@/app/resources/Theme";
+import { Styles } from "../resources/Styles";
 
-const HomeView = () => {
+export const HomeView = () => {
   const {
     pressed,
     manualIncrement,
@@ -29,13 +30,13 @@ const HomeView = () => {
         <ButtonStyle
           nome={Strings.nameButton.manual}
           isPressed={pressed.manual}
-          style="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-0 focus:ring-blue-300 font-medium rounded-full text-xs px-5 w-50 py-2.5 h-12 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          style={Styles.ButtonStyles.Manual}
           onClick={manualIncrement}
         />
         <ButtonStyle
           nome={Strings.nameButton.auto}
           isPressed={pressed.auto}
-          style="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-0 focus:ring-green-300 font-medium rounded-full text-xs px-5 w-50 h-12 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          style={Styles.ButtonStyles.Auto}
           onClick={autoIncrement}
         />
       </section>
@@ -45,18 +46,16 @@ const HomeView = () => {
         <ButtonStyle
           nome={Strings.nameButton.stop}
           isPressed={pressed.stop}
-          style="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-0 focus:ring-red-300 font-medium rounded-full text-xs px-5 py-2.5 text-center w-50 h-12 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          style={Styles.ButtonStyles.Stop}
           onClick={stopIncrement}
         />
         <ButtonStyle
           nome={Strings.nameButton.zero}
           isPressed={pressed.zero}
-          style="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-0 focus:ring-gray-300 font-medium rounded-full text-xs px-5 py-2.5 w-50 h-12 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          style={Styles.ButtonStyles.Zero}
           onClick={zeroIncrement}
         />
       </section>
     </main>
   );
 };
-
-export default HomeView;

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from "react";
-import ButtonType from "@/app/enum/ButtonType";
+import { ButtonType } from "@/app/enum/ButtonType";
 
-const IncrementHook = () => {
+export const IncrementHook = () => {
   const [number, setNumber] = useState({ n1: 0, n2: 0 });
 
   const [pressed, setPressed] = useState({
@@ -88,5 +88,3 @@ const IncrementHook = () => {
     number,
   };
 };
-
-export default IncrementHook;

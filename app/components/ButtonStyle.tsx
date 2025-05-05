@@ -1,7 +1,12 @@
-import ButtonProps from "@/app/props/ButtonProps";
-import Dimens from "@/app/resources/Dimens";
+import { ButtonProps } from "@/app/props/ButtonProps";
+import { Dimens } from "@/app/resources/Dimens";
 
-const ButtonStyle = ({ nome, style, isPressed, onClick }: ButtonProps) => {
+export const ButtonStyle = ({
+  nome,
+  style,
+  isPressed,
+  onClick,
+}: ButtonProps) => {
   return (
     <button
       className={`transition-transform duration-150} ${
@@ -13,4 +18,3 @@ const ButtonStyle = ({ nome, style, isPressed, onClick }: ButtonProps) => {
     </button>
   );
 };
-export default ButtonStyle;
